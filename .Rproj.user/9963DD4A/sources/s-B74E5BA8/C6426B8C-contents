@@ -1,0 +1,76 @@
+# R {#R}
+
+## Data index
+
+1. `n_A = dplyr::n(A)` the number of
+
+2. `last(A)` the end value of vector
+
+## Function
+
+1. Get the function name in inside of function:
+```{r eval=FALSE}
+as.character(dplyr::substitute(f_name))
+```
+
+## Package
+
+### Metadata
+
+1. Inheriting parameters from other functions
+
+```{r eval=FALSE}
+#' @param a This is the first argument
+foo <- function(a) a + 10
+
+#' @param b This is the second argument
+#' @inheritParams foo
+bar <- function(a, b) {
+  foo(a) * 10
+}
+```
+
+2. Documenting multiple functions in the same file
+
+`@describeIn xxx` or `@rdname xxx`
+
+```{r eval=FALSE}
+#' Foo bar generic
+#'
+#' @param x Object to foo.
+foobar <- function(x) UseMethod("foobar")
+
+#' @describeIn foobar Difference between the mean and the median
+foobar.numeric <- function(x) abs(mean(x) - median(x))
+
+#' @describeIn foobar First and last values pasted together in a string.
+foobar.character <- function(x) paste0(x[1], "-", x[length(x)])
+```
+
+
+```{r eval=FALSE}
+#' Basic arithmetic
+#'
+#' @param x,y numeric vectors.
+add <- function(x, y) x + y
+
+#' @rdname add
+times <- function(x, y) x * y
+```
+
+### Load Data
+
+1. put the data in Package
+
+```{r eval=FALSE}
+usethis::use_data(xts_Q, xts_P, xts_T, xts_PET)
+```
+
+2. set the metadata for data
+
+```{r eval=FALSE}
+#' Steamflow
+#' @format [xts] from 1999-01-01 to 2008-12-31 for two stations.
+"xts_Q"
+```
+

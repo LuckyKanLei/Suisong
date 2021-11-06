@@ -1,0 +1,15 @@
+# Git
+
+## Initial
+
+### After remote Reposity
+
+```
+echo "# Suisong" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:LuckyKanLei/Suisong.git
+git push -u origin main
+```
